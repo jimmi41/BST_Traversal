@@ -48,14 +48,27 @@ public class BinTree <E extends Comparable<E>> {
 		printPreOrder(root);
 	}
 	
-	private void printPreOrder(BinNode<E> bn) {
-		if(bn == null) {
+	private void printPreOrder(BinNode<E> bn) 
+	{
+		if(bn == null) 
+		{
 			return;
+		} 		
+		Stack<BinNode> nodeStack = new Stack<BinNode>(); 
+		nodeStack.push(bn); 
+  		while (nodeStack.empty() == false) 
+		{  
+            		BinNode Temp = nodeStack.peek(); 
+            		System.out.print(temp.getElement() + " "); 
+            		nodeStack.pop(); 
+            		if (temp.right != null) { 
+                		nodeStack.push(temp.right); 
+            		} 
+            		if (temp.left != null) { 
+               	 		nodeStack.push(temp.left); 
+            		}
 		}
-		System.out.println(bn.getElement());
-		printPreOrder(bn.getLeftChild());
-		printPreOrder(bn.getRightChild());
-	}
+	
 	
 	
 	
@@ -68,9 +81,19 @@ public class BinTree <E extends Comparable<E>> {
 		if(bn == null) {
 			return;
 		}
-		printInOrder(bn.getLeftChild());
-		System.out.println(bn.getElement());
-		printInOrder(bn.getRightChild());
+		Stack<BinNode> s = new Stack<BinNode>(); 
+		BinNode curr = bn;
+      		while (curr != null || s.size() > 0) 
+		{
+			while (curr != null) 
+			{ 
+				s.push(curr); 
+				curr = curr.left; 
+			} 
+			curr = s.pop(); 
+			System.out.print(curr.data + " "); 
+			curr = curr.right; 
+		} 
 	}
 	
 	
